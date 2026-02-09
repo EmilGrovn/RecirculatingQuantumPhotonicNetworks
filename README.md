@@ -13,13 +13,17 @@ arXiv: https://arxiv.org/abs/XXXX.XXXXX
 
 ## Getting started
 ### Install virtual environment (locally)
-#Virtual environemt
-#1: create
+Virtual environemt
+
+1: create
 python -m venv venv_RQPN
-#2: activate (in Windows PowerShell) - ONLY STEP WE NEED TO DO AFTER FIRST INSTALLMENT OF 1 AND 3
+
+2: activate (in Windows PowerShell) - only step we need after installment
 .\venv_RQPN\Scripts\Activate.ps1
-#3: Install requirements
+
+3: Install requirements
 pip install -r requirements.txt
+
 The code was maintained until 7th of February 2026. The requirements_freeze.txt file records the pinned versions of all Python dependencies used in the virtual environment on 7th of February 2026
 
 
