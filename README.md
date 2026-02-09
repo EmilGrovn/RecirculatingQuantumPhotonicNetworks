@@ -31,29 +31,34 @@ The code was maintained until 7th of February 2026. The requirements_freeze.txt 
 
 
 ### Run optimization
-You perform an optimization using src/run/run_RQPNN_local.py. You can run the script in powershell using: python .\src\run\run_RQPNN_local.py    
+You perform an optimization using src/run/run_RQPNN_local.py. You can run the script in powershell using: 
+- python .\src\run\run_RQPNN_local.py    
+
 To choose a given run, consider lines 18-29 in the script. Here you can choose between the configuration files for all 7 results, included in the paper.
+
 To reproduce a given result, you have to access the corresponding configuration file under execute_run\config. Modify the configuration file, so that the parameters match the specifications given in Supplemental Material of the paper. In each configuration file, the exact seed to generate the result is also written as a comment.
+
 In the configuration file CZ_chi3.yaml we have commented to explain all the different variables of the configuration file.
 
 ## Structure of the code
 Here we provide an overview of the structure of the code.
 RQPNs
----execute_run:
-    --- config: contains configuration files to initialize optimization of: 
+
+- 'execute_run:
+    - config: contains configuration files to initialize optimization of: 
     dual-rail encoded gates: qubit-qutrit CZ gate processing 5 (CZ_chi3_5m_qutrit) or 4 modes (CZ_chi3_qutrit) using chi3-nonlinearities, qubit-qubit CZ gate using chi3-nonlinearities (CZ_chi3), qubit-qubit CZ gate with two-level emitters (TLEs) (CZ_em), three-qubit Toffoli gate
     one-way repeater implementations: correction of loss in mode 1 (rep1_chi3) or mode 2 (rep12_chi3) or either mode (rep2_chi3) using chi3-nonlinearities, correction of loss in either mode (rep2_em)
---- venv_RQPNN: virtual environment to use (ignored by git)
---- src: all code for modeling and optimizing RQPNs
-    --- rqpnn:
-        --- rqpnn_spec: dataclass for specifying the hardware of a rqpnn instance (tested in test_rqpnn_spec.py)
-        --- rqpnn_basis: generate the basis for the Hilbert space and a matrix for switching between various convinient basises (tested in test_rqpnn_basis.py through analytical tests for the one-way repeaters and CZ gates with a chi3-rqpn and a TLE-rqpn and the three-qubit Toffoli gate for a chi3-rqpn)
-        --- rqpnn_raising_ops: generate all raising operators for an architecture
-        --- rqpnn_ham_ops.py: generate the operator for each term of the RQPN hamiltonian (tested in test_ham_ops)
-        --- rqpnn_parameterization: generate physical parameters of the Hamiltonian from trainable and fixed parameters of our parameterization (tested in test_parameterization.py through an example and in test_rates_parameterization.py and test_matrix_parameterization.py through examples)
-        --- rqpnn_hamiltonian.py: build RQPN hamiltonian from physical parameters and operators (tested in test_ham.py)
-        --- rqpnn_exc_idx_basis.py: NOT RELEVANT ANYMORE
-        --- rqpnn_stategeneration.py: generate product states (tested in test_stategen through analytical tests for the one-way repeaters and CZ gates with a chi3-rqpn and a TLE-rqpn and the three-qubit Toffoli gate for a chi3-rqpn) and transform modes NOT RELEVANT ANYMORE (tested in test_modetrans_unitary.py)
+- 'venv_RQPNN: virtual environment to use (ignored by git)
+- src: all code for modeling and optimizing RQPNs
+    - rqpnn:
+        - rqpnn_spec: dataclass for specifying the hardware of a rqpnn instance (tested in test_rqpnn_spec.py)
+        - rqpnn_basis: generate the basis for the Hilbert space and a matrix for switching between various convinient basises (tested in test_rqpnn_basis.py through analytical tests for the one-way repeaters and CZ gates with a chi3-rqpn and a TLE-rqpn and the three-qubit Toffoli gate for a chi3-rqpn)
+        - rqpnn_raising_ops: generate all raising operators for an architecture
+        - rqpnn_ham_ops.py: generate the operator for each term of the RQPN hamiltonian (tested in test_ham_ops)
+        - rqpnn_parameterization: generate physical parameters of the Hamiltonian from trainable and fixed parameters of our parameterization (tested in test_parameterization.py through an example and in test_rates_parameterization.py and test_matrix_parameterization.py through examples)
+        - rqpnn_hamiltonian.py: build RQPN hamiltonian from physical parameters and operators (tested in test_ham.py)
+        - rqpnn_exc_idx_basis.py: NOT RELEVANT ANYMORE
+        - rqpnn_stategeneration.py: generate product states (tested in test_stategen through analytical tests for the one-way repeaters and CZ gates with a chi3-rqpn and a TLE-rqpn and the three-qubit Toffoli gate for a chi3-rqpn) and transform modes NOT RELEVANT ANYMORE (tested in test_modetrans_unitary.py)
     --- qip_task:
         --- qiptask_generate_params.py: generate amplitude and trainable parameters from configuration dictionaries (tested in test_qip_para_amp_dicts.py) OPTION: UPDATE TEST FOR CUSTOM 
         --- qiptask_init_target_states.py: generate initial and target states for ta variety of quantum information processing tasks (tested in test_init_target.py through examples)
