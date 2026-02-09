@@ -44,13 +44,13 @@ In the configuration file CZ_chi3.yaml we have commented to explain all the diff
 Here we provide an overview of the structure of the code.
 RQPNs
 
-- 'execute_run:
+- \execute_run:
     - config: contains configuration files to initialize optimization of: 
     dual-rail encoded gates: qubit-qutrit CZ gate processing 5 (CZ_chi3_5m_qutrit) or 4 modes (CZ_chi3_qutrit) using chi3-nonlinearities, qubit-qubit CZ gate using chi3-nonlinearities (CZ_chi3), qubit-qubit CZ gate with two-level emitters (TLEs) (CZ_em), three-qubit Toffoli gate
     one-way repeater implementations: correction of loss in mode 1 (rep1_chi3) or mode 2 (rep12_chi3) or either mode (rep2_chi3) using chi3-nonlinearities, correction of loss in either mode (rep2_em)
-- 'venv_RQPNN: virtual environment to use (ignored by git)
-- src: all code for modeling and optimizing RQPNs
-    - rqpnn:
+- \venv_RQPNN: virtual environment to use (ignored by git)
+- \src: all code for modeling and optimizing RQPNs
+    - \rqpnn:
         - rqpnn_spec: dataclass for specifying the hardware of a rqpnn instance (tested in test_rqpnn_spec.py)
         - rqpnn_basis: generate the basis for the Hilbert space and a matrix for switching between various convinient basises (tested in test_rqpnn_basis.py through analytical tests for the one-way repeaters and CZ gates with a chi3-rqpn and a TLE-rqpn and the three-qubit Toffoli gate for a chi3-rqpn)
         - rqpnn_raising_ops: generate all raising operators for an architecture
@@ -59,20 +59,20 @@ RQPNs
         - rqpnn_hamiltonian.py: build RQPN hamiltonian from physical parameters and operators (tested in test_ham.py)
         - rqpnn_exc_idx_basis.py: NOT RELEVANT ANYMORE
         - rqpnn_stategeneration.py: generate product states (tested in test_stategen through analytical tests for the one-way repeaters and CZ gates with a chi3-rqpn and a TLE-rqpn and the three-qubit Toffoli gate for a chi3-rqpn) and transform modes NOT RELEVANT ANYMORE (tested in test_modetrans_unitary.py)
-    --- qip_task:
-        --- qiptask_generate_params.py: generate amplitude and trainable parameters from configuration dictionaries (tested in test_qip_para_amp_dicts.py) OPTION: UPDATE TEST FOR CUSTOM 
-        --- qiptask_init_target_states.py: generate initial and target states for ta variety of quantum information processing tasks (tested in test_init_target.py through examples)
-        --- qiptask_evolve.py: evolve a photonic input to output using the RQPN in its recirculating configuration (tested in test_evolve.py by comparing to various analytical examples that test the whole RQPN hamiltonian for both possible nonlinearities: chi3 or TLE)
-        --- qip_task_build_masked_optimizer.py: generate mask for which parameters to optimize, code written with AI and tested by running optimizations OPTION: CLEAN UP CODE SLIGHTLY
-        --- qiptask_costfunc.py: generate costfunction (tested in test_qip_loss.py through various examples)
-        --- qiptask_stepper.py: update parameters, tested by running optimizations and varifying that we minimize the cost function and obtain the desired qip-transformation at the end of the optimization
-        --- qiptask_optimizer.py: optimize parameters with gradient-descent-type updates over several epochs,  tested  by running optimizations and varifying that we obtain the desired qip-transformation at the end of the optimization OPTION: CLEAN UP CODE SLIGHTLY
-        --- qiptask_optimizer.py: class (using all functionalities) for optimizing the parameters of a given RQPN to achieve a desired transformation, tested  by running optimizations and verifying that we obtain the desired qip-transformation at the end of the optimization.
-        --- qiptask_generateplots.py: for generating various plots based on the RQPN parameters - NOT USED FOR PLOTS IN PAPER
-    --- plots: generate plots for final results
-    --- workflow: contains a script for putting all aspects of the above code together to perform an optimzation run for a given configuration
-    --- run: includes run_RQPNN_local for running an optimization locally 
---- tests: tests to verify that the code is correct - see source code overview to see what each script tests
+    - \qip_task:
+        - qiptask_generate_params.py: generate amplitude and trainable parameters from configuration dictionaries (tested in test_qip_para_amp_dicts.py)
+        - qiptask_init_target_states.py: generate initial and target states for ta variety of quantum information processing tasks (tested in test_init_target.py through examples)
+        - qiptask_evolve.py: evolve a photonic input to output using the RQPN in its recirculating configuration (tested in test_evolve.py by comparing to various analytical examples that test the whole RQPN hamiltonian for both possible nonlinearities: chi3 or TLE)
+        - qip_task_build_masked_optimizer.py: generate mask for which parameters to optimize, code written with AI and tested by running optimizations OPTION: CLEAN UP CODE SLIGHTLY
+        - qiptask_costfunc.py: generate costfunction (tested in test_qip_loss.py through various examples)
+        - qiptask_stepper.py: update parameters, tested by running optimizations and varifying that we minimize the cost function and obtain the desired qip-transformation at the end of the optimization
+        - qiptask_optimizer.py: optimize parameters with gradient-descent-type updates over several epochs,  tested  by running optimizations and varifying that we obtain the desired qip-transformation at the end of the optimization
+        - qiptask_optimizer.py: class (using all functionalities) for optimizing the parameters of a given RQPN to achieve a desired transformation, tested  by running optimizations and verifying that we obtain the desired qip-transformation at the end of the optimization.
+        - qiptask_generateplots.py: for generating various plots based on the RQPN parameters - NOT USED FOR PLOTS IN PAPER
+    - \workflow: contains a script for putting all aspects of the above code together to perform an optimzation run for a given configuration
+    - \run: includes run_RQPNN_local for running an optimization locally 
+    - \results: contains data files of numerical results and a notebook for inspecting them
+- \tests: tests to verify that the code is correct - see source code overview to see what each script tests
 
 requirements/_GPU/_HPC: requirements for virtual environment, depending on whether we use a GPU or CPU.
 pyproject.toml: for enabling pytests
