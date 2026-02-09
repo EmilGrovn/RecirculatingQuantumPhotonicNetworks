@@ -1,0 +1,15 @@
+#packages for virtual environment
+#for plotting
+matplotlib
+#for logging
+wandb
+
+#for quantum control
+dynamiqs
+jax[cuda12] 
+equinox
+
+#optimization in jax
+optax
+
+-e .#editable install of the package in the current directory

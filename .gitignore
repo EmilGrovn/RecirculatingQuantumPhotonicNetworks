@@ -1,0 +1,20 @@
+# --- Python bytecode & builds ---
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+*.dll
+build/
+dist/
+.eggs/
+*.egg-info/
+
+# --- Virtual environments ---
+venv_RQPN/
+
+# --- log
+wandb/ 
+
+# --- 
+src/preparations_github
+src/plot

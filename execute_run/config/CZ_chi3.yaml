@@ -1,0 +1,87 @@
+sysSpec:
+  M_cav: 4      #number of cavities
+  M_em: 0       #number of two-level emitters (either zero or equal to number of cavities)
+  N_exc_list:   #excitation numbers included in the hilbert space
+  - 2
+para:
+  custom: False #if True, you need to give a run-id. Only False is enabled in this version for simplicity. Modify script "qiptask_generate_params" 
+  N_steps: 50   #number of time bins
+  key_seed: 5   #we used seed 5
+  tau:          #time steps
+    offset: 0.0 
+    noise: 0.01
+  delta_cav:    #cavity detuning
+    offset: 0.0
+    noise: 0.1
+  delta_em:     #emitter detuning
+    offset: 0.0
+    noise: 0.01
+  kappa:        #cavity coupling
+    offset: 0.0
+    noise: 0.1
+  coeff_vec:    #COUPLING MATRIX
+    offset: 0.0
+    noise: 1.0
+  S_in_Rmat:    #IRRELEVANT TO THE FINAL RQPN DESIGN
+    offset: 0.0
+    noise: 0.0
+amp:
+  custom: False 
+  N_steps: 50    #number of time bins
+  max_tau: 0.03 #maximum duration of each time step
+  min_tau: 0.02 #minimum duration of each time step
+  delta_cav:    
+    shape: uniform
+    amp_physical: 15.0
+    ramp_up_speed_physical: 1.0
+  delta_em:
+    shape: uniform
+    amp_physical: 5.0
+    ramp_up_speed_physical: 1.0
+    offset_shape: uniform
+    offset_size_physical: 0.0   #HAS BEEN SET TO ZERO FOR ALL RESULTS IN THE PAPER
+  kappa:
+    shape: uniform
+    amp_physical: 15.0
+    ramp_up_speed_physical: 1.0
+
+opti:
+  QIPtrans: CZ gate 2qubit      #SPECIFY the desired input-output transformation. If you want to create a new transformation, visit qiptask_init_target_states.py and modify
+  include_time_evolution: true  #ALWAYS TRUE FOR THE FINAL DESIGN OF THE RQPN
+  include_mode_evolution: False #ALWAYS FALSE FOR THE FINAL DESIGN OF THE RQPN
+  solver: Expm                  #ALWAYS Expm FOR THIS CODE
+  jit_stepper: True             #choose whether to use just-in-time compilation
+  GPU: False         # if you want to run on GPU (i.e., =TRUE), you must choose the appropriate virtual environment
+  cost:   #COST FUNCTION
+    inf: 1.0    #ALWAYS 1
+    time: 0.0   #ZERO for all results in the paper. If it is non-zero you penalize the time duration directly in the cost function
+    bw_deltacav: 0.0  #penalize to get more smooth signals of the cavity detunings
+    bw_kappa: 0.0     #penalize to get more smooth signals of the cavity couplings
+    bw_deltaem: 0.0   #penalize to get more smooth signals of the TLE detunings
+  optimizer:
+    type: adam      #ADAM is the only option of our code
+    parameters:
+      lr: 0.01      #learning rate
+      b1: 0.999     #this parameters have been 0.999 for all runs in the paper
+      b2: 0.999     #this parameters have been 0.999 for all runs in the paper
+    mask:             #mask that determines which parameters we train
+      tau: True
+      delta_cav: True
+      kappa: True
+      delta_em: True
+      coeff_vec: True
+      S_in_Rmat: False
+  training:
+    epochs: 50000           #maximum number of epochs
+    plot_period: 50000      #how often we plot during the optimization
+    plot_periodically: True #whether we plot during the optimization
+    log_wandb: True         #whether you log the optimization
+    cost_tol: 0.000001      #tolerance for how slowly the cost function is allowed to improve
+    log_inf_tol: 0.000001   #tolerance for how slowly the cost function is allowed to improve
+    epoch_interval: 500 
+    inf_tol: 0.001          #THE INFIDELITY THRESHOLD: IF THE INFIDELITY GOES BELOW THIS VALUE, THEN THE OPTIMIZATION IS DONE
+    approach_continuous: False  #always False
+wandbSpec:
+  project: rqpnn-final          #specify the project name in wandb
+  group: CZ gate 2qubit chi3    #specify group name (you can choose whatever)
+  sweep_name: 'CZ gate 2qubit M_em: 0'  #specify sweep name (you can choose whatever)

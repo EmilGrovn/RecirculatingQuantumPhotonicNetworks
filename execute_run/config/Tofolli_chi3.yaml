@@ -1,0 +1,87 @@
+sysSpec:
+  M_cav: 6
+  M_em: 0
+  N_exc_list:
+  - 3
+para:
+  custom: False
+  run_id: sg7fdfp4 #34gze1ln
+  N_steps: 80
+  key_seed: 43  #we used seed 43
+  tau: 
+    offset: 0.0
+    noise: 0.0
+  delta_cav:
+    offset: 0.0
+    noise: 0.0
+  delta_em: 
+    offset: 0.0
+    noise: 0.1
+  kappa: 
+    offset: 0.0
+    noise: 0.1
+  coeff_vec: 
+    offset: 0.0
+    noise: 1.0
+  S_in_Rmat:
+    offset: 0.0
+    noise: 0.0
+amp:
+  custom: False
+  run_id: sg7fdfp4 #34gze1ln
+  N_steps: 80 #number of time pieces
+  max_tau: 0.0300
+  min_tau: 0.0200
+  delta_cav:
+    shape: uniform
+    amp_physical: 150.0
+    ramp_up_speed_physical: 1.0
+  delta_em:
+    shape: uniform
+    amp_physical: 100.0
+    ramp_up_speed_physical: 1.0
+  kappa:
+    shape: uniform
+    amp_physical: 150.0
+    ramp_up_speed_physical: 1.0
+
+opti:
+  QIPtrans: Tofolli gate 3qubit
+  include_time_evolution: true
+  include_mode_evolution: false
+  solver: Expm
+  jit_stepper: False
+  GPU: False       # determines which virtual environment we use
+  cost:
+    inf: 1.0
+    time: 0.0
+    bw_deltacav: 0.0
+    bw_kappa: 0.0
+    bw_deltaem: 0.0
+  optimizer:
+    type: adam
+    parameters:
+      lr: 0.012
+      b1: 0.999
+      b2: 0.999
+    mask:
+      tau: False
+      delta_cav: True
+      kappa: True
+      delta_em: False
+      coeff_vec: True
+      S_in_Rmat: False
+  training:
+    epochs: 30000
+    plot_period: 30000
+    plot_periodically: True
+    log_wandb: True
+    cost_tol: 0.000001
+    log_inf_tol: 0.000001
+    epoch_interval: 500
+    inf_tol: 0.003
+    approach_continuous: False
+wandbSpec:
+  project: rqpnn-final
+  group: Tofolli gate 3qubit chi3
+  sweep_name: 'Tofolli gate 3qubit M_em: 0'

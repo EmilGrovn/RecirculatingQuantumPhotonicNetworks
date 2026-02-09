@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rqpnn"                # distribution name on pip
+version = "0.0.0"
+requires-python = ">=3.9"
+dependencies = []             # e.g. ["pyyaml", "numpy"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["rqpnn*", "qip_task*", "workflow*"]  # add "run*" if you want it too
+# exclude = ["tests*"]                          # optional

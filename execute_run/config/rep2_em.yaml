@@ -1,0 +1,90 @@
+sysSpec:
+  M_cav: 2
+  M_em: 2
+  N_exc_list:
+  - 5
+  - 6
+para:
+  custom: False
+  run_id: e897i3kd
+  N_steps: 640
+  key_seed: 5   #we used seed 5
+  tau: 
+    offset: 0.0
+    noise: 0.01
+  delta_cav:
+    offset: 1.0
+    noise: 0.01
+  delta_em: 
+    offset: 1.0
+    noise: 0.01
+  kappa: 
+    offset: 0.0
+    noise: 0.01
+  coeff_vec: 
+    offset: 1.0
+    noise: 0.0
+  S_in_Rmat:
+    offset: 0.0
+    noise: 0.0
+amp:
+  custom: False
+  run_id: e897i3kd
+  N_steps: 640 #number of time pieces
+  max_tau: 0.028625
+  min_tau: 0.026125
+  delta_cav:
+    shape: uniform
+    amp_physical: 5.0
+    ramp_up_speed_physical: 1.0
+  delta_em:
+    shape: uniform
+    amp_physical: 5.0
+    ramp_up_speed_physical: 1.0
+    offset_shape: uniform
+    offset_size_physical: 0.0
+  kappa:
+    shape: uniform
+    amp_physical: 5.0
+    ramp_up_speed_physical: 1.0
+
+opti:
+  QIPtrans: 2loss emitter coherent repeater
+  include_time_evolution: true
+  include_mode_evolution: False
+  solver: Expm
+  jit_stepper: True
+  GPU: False         # determines which virtual environment we use
+  cost:
+    inf: 1.0
+    time: 0.0
+    bw_deltacav: 0.005
+    bw_kappa: 0.002
+    bw_deltaem: 0.005
+  optimizer:
+    type: adam
+    parameters:
+      lr: 0.01
+      b1: 0.999
+      b2: 0.999
+    mask:
+      tau: True
+      delta_cav: True
+      kappa: True
+      delta_em: True
+      coeff_vec: False
+      S_in_Rmat: False
+  training:
+    epochs: 20000
+    plot_period: 20000
+    plot_periodically: True
+    log_wandb: True
+    cost_tol: 0.000001
+    log_inf_tol: 0.000001
+    epoch_interval: 500
+    inf_tol: 0.001
+    approach_continuous: False
+wandbSpec:
+  project: rqpnn-final
+  group: repeater2_em
+  sweep_name: '2loss coherent repeater M_em: 2'

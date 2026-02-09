@@ -1,0 +1,87 @@
+sysSpec:
+  M_cav: 4
+  M_em: 4
+  N_exc_list:
+  - 2
+para:
+  custom: False
+  N_steps: 50
+  key_seed: 6     #we used seed 43
+  tau: 
+    offset: 0.0
+    noise: 0.01
+  delta_cav:
+    offset: 0.0
+    noise: 0.1
+  delta_em: 
+    offset: 0.0
+    noise: 0.1
+  kappa: 
+    offset: 0.0
+    noise: 0.1
+  coeff_vec: 
+    offset: 0.0
+    noise: 1.0
+  S_in_Rmat:
+    offset: 0.0
+    noise: 0.0
+amp:
+  custom: False
+  N_steps: 50 #number of time pieces
+  max_tau: 0.074
+  min_tau: 0.070
+  delta_cav:
+    shape: uniform
+    amp_physical: 5.0
+    ramp_up_speed_physical: 1.0
+  delta_em:
+    shape: uniform
+    amp_physical: 5.0
+    ramp_up_speed_physical: 1.0
+    offset_shape: uniform
+    offset_size_physical: 0.0
+  kappa:
+    shape: uniform
+    amp_physical: 5.0
+    ramp_up_speed_physical: 1.0
+
+opti:
+  QIPtrans: CZ gate 2qubit
+  include_time_evolution: true
+  include_mode_evolution: False
+  solver: Expm
+  jit_stepper: True
+  GPU: False         # determines which virtual environment we use
+  cost:
+    inf: 1.0
+    time: 0.0
+    bw_deltacav: 0.0
+    bw_kappa: 0.0
+    bw_deltaem: 0.0
+  optimizer:
+    type: adam
+    parameters:
+      lr: 0.01
+      b1: 0.999
+      b2: 0.999
+    mask:
+      tau: True
+      delta_cav: True
+      kappa: True
+      delta_em: True
+      coeff_vec: True
+      S_in_Rmat: False
+  training:
+    epochs: 50000
+    plot_period: 50000
+    plot_periodically: True
+    log_wandb: True
+    cost_tol: 0.000001
+    log_inf_tol: 0.000001
+    epoch_interval: 500
+    inf_tol: 0.001
+    approach_continuous: False
+wandbSpec:
+  project: rqpnn-final
+  group: CZ gate 2qubit em
+  sweep_name: 'CZ gate 2qubit M_em: 4'

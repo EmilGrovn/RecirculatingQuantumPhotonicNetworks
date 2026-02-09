@@ -1,0 +1,21 @@
+#packages for virtual environment
+#for plotting
+matplotlib
+
+#for notebooks
+jupyter
+ipykernel
+
+#for logging
+wandb
+
+#for quantum control
+dynamiqs
+jax 
+equinox
+
+#optimization in jax
+optax
+
+#for unit tests
+pytest
