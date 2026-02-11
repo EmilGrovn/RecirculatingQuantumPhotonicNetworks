@@ -9,9 +9,9 @@ In the following, we walk through how to get started reproducing the results of 
 
 ## Paper
 This code accompanies: *Recirculating Quantum Photonic Networks for Fast Deterministic Quantum Information Processing* (2026).  
-arXiv: https://arxiv.org/abs/XXXX.XXXXX
+arXiv:
 
-**If you find the code or paper useful in your research, please consider citing the paper**
+If you find the code or paper useful in your research, please consider citing the paper.
 
 ## Getting started
 ### Install virtual environment (locally)
