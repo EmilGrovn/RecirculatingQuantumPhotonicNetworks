@@ -1,4 +1,6 @@
 # Modeling and optimization of Recirculating Quantum Photonic Networks
+Updated as of latest submission to arxiv (February 11, 2026).
+
 This repository provides all the code necessary to reproduce the results in the paper "Recirculating Quantum Photonic Networks for Fast Deterministic Quantum Information Processing".
 
 In src\results you also find the data files for the all numerical results and a notebook (inspect_results.ipynb) for plotting them.
