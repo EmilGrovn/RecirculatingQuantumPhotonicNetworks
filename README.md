@@ -9,7 +9,7 @@ In the following, we walk through how to get started reproducing the results of 
 
 ## Paper
 This code accompanies: *Recirculating Quantum Photonic Networks for Fast Deterministic Quantum Information Processing* (2026).  
-arXiv:
+arXiv: https://arxiv.org/abs/2602.11033
 
 If you find the code or paper useful in your research, please consider citing the paper.
 
