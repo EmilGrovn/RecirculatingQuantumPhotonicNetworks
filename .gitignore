@@ -18,3 +18,7 @@ wandb/
 # --- 
 src/preparations_github
 src/plot
+
+# --- delay_model (Julia): new runs and rendered figures
+delay_model/output/
+delay_model/figures/

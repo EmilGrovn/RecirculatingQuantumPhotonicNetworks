@@ -42,6 +42,9 @@ To reproduce a given result, you have to access the corresponding configuration 
 
 In the configuration file CZ_chi3.yaml we have commented to explain all the different variables of the configuration file.
 
+### Finite propagation delay (Julia)
+The folder delay_model contains the delay-resolved model of the recirculating network (time-bin model as in WaveguideQED.jl, written in Julia) used for the figure on a finite round-trip propagation delay through the mixing circuit and the corresponding section of the Supplemental Material. It evaluates the SLH-optimised CZ gate at finite delay, re-optimises the controls with the delay included, and contains the solutions behind that figure and the checks against WaveguideQED.jl. See delay_model/README.md for installation and usage.
+
 ## Structure of the code
 Here we provide an overview of the structure of the code.
 RQPNs
@@ -75,6 +78,7 @@ RQPNs
     - \run: includes run_RQPNN_local for running an optimization locally 
     - \results: contains data files of numerical results and a notebook for inspecting them
 - \tests: tests to verify that the code is correct - see source code overview to see what each script tests
+- \delay_model: delay-resolved model with a finite round-trip propagation delay (Julia), see delay_model/README.md
 
 requirements/_GPU/_HPC: requirements for virtual environment, depending on whether we use a GPU or CPU.
 pyproject.toml: for enabling pytests

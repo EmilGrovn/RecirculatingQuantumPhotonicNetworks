@@ -1,0 +1,17 @@
+name = "RQPNDelay"
+uuid = "eafc9212-96d9-432e-9de8-dfab2d03fee5"
+version = "1.0.0"
+authors = ["Matias Bundgaard-Nielsen"]
+
+[deps]
+JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+Optim = "429524aa-4258-5aef-a3af-852621145aeb"
+Printf = "de0858da-6303-5e67-8744-51eddeeeb8d7"
+Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+
+[compat]
+JSON = "1"
+Optim = "1.9, 2"
+julia = "1.10"
+
