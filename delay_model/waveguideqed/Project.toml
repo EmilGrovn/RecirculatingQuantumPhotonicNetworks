@@ -1,0 +1,14 @@
+[deps]
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+Printf = "de0858da-6303-5e67-8744-51eddeeeb8d7"
+QuantumOptics = "6e0679c1-51ea-5a7c-ac74-d61b76210b0c"
+RQPNDelay = "eafc9212-96d9-432e-9de8-dfab2d03fee5"
+WaveguideQED = "c4555495-0e8d-488d-8e6a-965ecefe9055"
+
+[sources]
+RQPNDelay = {path = ".."}
+
+[compat]
+QuantumOptics = "1"
+WaveguideQED = "0.2.14"
+julia = "1.11"
